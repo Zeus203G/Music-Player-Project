@@ -1,0 +1,432 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+:root {
+  --primary-color: #ec1f55;
+  --text-color: #333;
+}
+
+html {
+  box-sizing: border-box;
+  font-family: "Lora", serif;
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit;
+}
+
+body {
+  background-color: #f5f5f5;
+}
+
+.player {
+  position: relative;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.player .icon-pause {
+  display: none;
+}
+
+.player.playing .icon-pause {
+  display: inline-block;
+}
+
+.player.playing .icon-play {
+  display: none;
+}
+
+.dashboard {
+  padding: 16px 16px 14px;
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  max-width: 480px;
+  border-bottom: 1px solid #ebebeb;
+  z-index: 999;
+}
+
+/* HEADER */
+header {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+header h4 {
+  color: var(--primary-color);
+  font-size: 12px;
+}
+
+header h2 {
+  color: var(--text-color);
+  font-size: 20px;
+}
+/* search */
+.search-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 16px 0;
+}
+.search-input {
+  width: 80%;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+}
+.search-button {
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.search-button:hover {
+  background-color: #c30e3a;
+}
+/* CD */
+.cd {
+  width: 200px; /* Kích thước ban đầu */
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+}
+
+.cd-thumb {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+  animation: rotate 10s linear infinite;
+  background-color: #333;
+  background-image: url('./image/35f9384ad0a541b8a5cfdd71ffc237e9H3000W3000_464_464.jpg');
+}
+
+.cd-thumb.pause {
+  animation-play-state: paused; /* Tạm dừng khi nhạc dừng */
+  transition: transform 0.3s ease-out; /* Hiệu ứng dừng mềm mại */
+}
+
+/* CONTROL */
+.control {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 18px 0 8px 0;
+}
+
+.control .btn {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #666;
+  font-size: 18px;
+  border-radius: 50%;
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+
+.control .btn:not(.btn-toggle-play):active {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.control .btn:active {
+  opacity: 0.7;
+}
+
+.control .btn.active {
+  color: var(--primary-color);
+}
+
+.control .btn-toggle-play {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  font-size: 24px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-color);
+}
+
+.progress {
+  width: 100%;
+  -webkit-appearance: none;
+  height: 6px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+}
+
+.progress::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  cursor: pointer;
+}
+
+/* PLAYLIST */
+.playlist {
+  position: relative;
+  margin-top: 420px; /* Giảm bớt khoảng cách phía trên */
+  padding: 12px 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-height: 60vh;
+  overflow-y: auto; /* Cuộn được khi danh sách quá dài */
+}
+
+.btn-repeat {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-repeat.active {
+  color: #ec1f55; /* Màu xanh lá khi nút được kích hoạt */
+}
+
+.btn-repeat:hover {
+  color: #ec1f55; /* Màu khi hover */
+}
+.btn-next:hover { 
+  color: #ec1f55; /* Màu khi hover */
+}
+.btn-prev:hover { 
+  color: #ec1f55; /* Màu khi hover */
+}
+.btn-random:hover { 
+  color: #ec1f55; /* Màu khi hover */
+}
+
+
+.song {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  padding: 12px 16px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.song:hover {
+  background-color: #f5f5f5; /* Thêm hiệu ứng hover */
+  transform: scale(1.02); /* Tăng nhẹ kích thước khi hover */
+}
+
+.song.active {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.song:active {
+  opacity: 0.8; /* Hiệu ứng nhấn khi click */
+}
+
+.song .thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-size: cover;
+  margin-right: 12px;
+}
+
+.song .body {
+  flex: 1;
+}
+
+.song .body .title {
+  font-size: 16px;
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+.song .body .author {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #999;
+}
+
+.song .option {
+  margin-left: 16px;
+  padding: 10px;
+  font-size: 18px;
+  color: #999;
+}
+
+.song.active .option,
+.song .option:hover {
+  color: #fff; /* Màu sắc của option khi active hoặc hover */
+}
+
+/* Điều chỉnh menu option */
+.song .option__menu {
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.song .option.active .option__menu {
+  position: absolute;
+  display: flex;
+  visibility: visible;
+  opacity: 1;
+  background: #fff;
+  color: #333;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  right: 4px;
+  top: 32px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+.song .option.active .option__menu li {
+  padding: 12px 14px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit;
+  -webkit-user-select: none; /* Dành cho Safari, Safari trên iOS, Microsoft Edge */
+  user-select: none; /* Cú pháp chuẩn cho hầu hết các trình duyệt hiện đại */
+}
+
+.add_Song {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 10px;
+  width: 100%;
+  z-index: 999;
+}
+
+.add_Song__btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .cd {
+    width: 150px;
+    height: 150px;
+  }
+
+  .cd-thumb {
+    animation: rotate 12s linear infinite; /* Đĩa quay khi thu nhỏ màn hình */
+  }
+
+  .player {
+    max-width: 100%;
+    margin-top: 30px;
+  }
+
+  .player .icon-pause {
+    display: none;
+  }
+
+  .player.playing .icon-pause {
+    display: inline-block;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
